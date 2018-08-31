@@ -18,9 +18,9 @@ public class LocationManager {
 		FileConfiguration saves = fm.getConfigFileConfiguration();
 		
 		saves.set("location." + name + ".worldname", loc.getWorld().getName());
-		saves.set("location." + name + ".x", loc.getX());
-		saves.set("location." + name + ".y", loc.getY());
-		saves.set("location." + name + ".z", loc.getZ());
+		saves.set("location." + name + ".x", loc.getBlockX() + 0.500);
+		saves.set("location." + name + ".y", loc.getBlockY() + 0.500);
+		saves.set("location." + name + ".z", loc.getBlockZ() + 0.500);
 		saves.set("location." + name + ".yaw", loc.getYaw());
 		saves.set("location." + name + ".pitch", loc.getPitch());
 		
@@ -36,20 +36,24 @@ public class LocationManager {
 	
 	public static Location get(String name) {
 		
-		FileManager fm = new FileManager();
-		
-		FileConfiguration saves = fm.getConfigFileConfiguration();
-		
-		World worldname = Bukkit.getWorld(saves.getString("location." + name + ".worldname"));
-		double x = saves.getDouble("location." + name + ".x");
-		double y = saves.getDouble("location." + name + ".y");
-		double z = saves.getDouble("location." + name + ".z");
-		double yaw = saves.getDouble("location." + name + ".yaw");
-		double pitch = saves.getDouble("location." + name + ".pitch");
+		try {
+			FileManager fm = new FileManager();
 
-		Location loc = new Location(worldname, x, y, z, (float) yaw, (float) pitch);
-		
-		return loc;
+			FileConfiguration saves = fm.getConfigFileConfiguration();
+
+			World worldname = Bukkit.getWorld(saves.getString("location." + name + ".worldname"));
+			double x = saves.getDouble("location." + name + ".x");
+			double y = saves.getDouble("location." + name + ".y");
+			double z = saves.getDouble("location." + name + ".z");
+			double yaw = saves.getDouble("location." + name + ".yaw");
+			double pitch = saves.getDouble("location." + name + ".pitch");
+
+			Location loc = new Location(worldname, x, y, z, (float) yaw, (float) pitch);
+
+			return loc;
+		} catch (NullPointerException e) {
+			return null;
+		}
 		
 	}
 	

@@ -37,7 +37,7 @@ public class ScoreboardManager {
 
 		Objective healthOb = board.registerNewObjective("PlayerHealth", "health");
 		healthOb.setDisplaySlot(DisplaySlot.BELOW_NAME);
-		healthOb.setDisplayName(ChatColor.RED + "§4<3"); //Emoji ist nich UTF-8 xD
+		healthOb.setDisplayName(ChatColor.RED + "§4U+2764");
 
 		Objective sidebar = board.registerNewObjective("Sidebar", "dummy");
 		sidebar.setDisplaySlot(DisplaySlot.SIDEBAR);
